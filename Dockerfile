@@ -33,15 +33,17 @@ RUN pip install robotframework-selenium2library
 #Install Chinese font
 RUN apt-get install fonts-wqy-zenhei
 
+RUN mkdir /robot
 RUN mkdir /testing
-#ADD ./testing /testing
+
 ENV DISPLAY=:1.0
 ENV ROBOT_TESTS=/testing/
-WORKDIR /testing
-COPY ./testing /testing
-COPY entry_point.sh /testing/entry_point.sh
+WORKDIR /robot
+#COPY ./testing /testing
+COPY entry_point.sh /robot/entry_point.sh
 
 
-ENTRYPOINT ["/testing/entry_point.sh"]
+ENTRYPOINT ["/robot/entry_point.sh"]
 
 #CMD  [ "bash", "-c", "Xvfb :1 -screen 0 1024x768x16 & > xvfb.log; robot --outputdir  /testing/results /testing/" ]
+#CMD  [ "bash", "-c", "Xvfb :1 -screen 0 1024x768x16 & > xvfb.log; bash" ]
