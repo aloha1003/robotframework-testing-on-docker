@@ -38,4 +38,10 @@ RUN mkdir /testing
 ENV DISPLAY=:1.0
 ENV ROBOT_TESTS=/testing/
 WORKDIR /testing
-CMD  [ "bash", "-c", "Xvfb :1 -screen 0 1024x768x16 & > xvfb.log; robot --outputdir  /testing/results /testing/" ]
+COPY ./testing /testing
+COPY entry_point.sh /testing/entry_point.sh
+
+
+ENTRYPOINT ["/testing/entry_point.sh"]
+
+#CMD  [ "bash", "-c", "Xvfb :1 -screen 0 1024x768x16 & > xvfb.log; robot --outputdir  /testing/results /testing/" ]
